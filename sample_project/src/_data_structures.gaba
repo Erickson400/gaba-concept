@@ -1,0 +1,20 @@
+
+vram :: unique struct {
+
+}
+
+sram :: unique struct {
+
+}
+
+wram :: unique struct {
+
+}
+
+oam :: unique struct {
+
+ }
+
+hram :: unique struct {
+
+}
