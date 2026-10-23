@@ -1,6 +1,5 @@
 # Gaba-Concept
 A concept/plan/idea for a Gameboy Color High Level Assembler. Weather it'll ever be made is uncertain. The architecture will keep changing as I learn more about Gameboy assemblers.
-
 ```
 package main
 
@@ -22,10 +21,8 @@ main := proc() {
     goto main
 }
 ```
-
-
 ### Goals
-Simplicity and redability is the main goal of the project. Unlike RGBDS which is rich in features, Gaba is tailored for developing GBC games with MBC5 enabled only. Gaba is not recommended for decomps or hacks. Gaba should be enjoyable to write, and non-cryptic to read for a new developer, 
+Simplicity and redability is the main goal of the project. Unlike RGBDS which is rich in features, Gaba is tailored for developing GBC games with MBC5 enabled only. It's not recommended for decomps or hacks. The language should be enjoyable to write, and non-cryptic to read for a new developer, 
 
 ### Features
 - Scopes
