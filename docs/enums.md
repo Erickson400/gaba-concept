@@ -1,19 +1,37 @@
-# Enums File
-The *_enums.gaba* file holds enums for numeric constants that can later be used in your assembly code as flags.
+# Enums
+Enums hold numeric constants that can later be used in your code to describe types or offsets.
 
-## Enums
 ```
-// In _enums.gaba
 TileType :: enum {
-    Ground = 4  // Optional initial value
+    Ground
     Water
     Pickup
-    Door
+    Door 
 }
-```
-```
-// In your assembly code
-a = TileType.Water
-```
-Enums can range from 0 to 255, if it overflows it'll wrap around. Even though they have an 8-bit range, they can be used in instructions that take n16 or u3 values. An error will be thrown in the case you pass an enum value greater than 7 for u3.
 
+a = TileType.Water  // Same as "a = 1" 
+```
+You have the options to add an initial offset, or a step amount. 
+```
+Tile :: enum by 16 {
+    Ground = 0x8000
+    Water         // 0x8010
+    Pickup        // 0x8020
+    Door          // 0x8030
+}
+hl = Tile.Pickup  // Same as "hl = 0x8020" 
+```
+## EBNF Specs
+```
+enum = enum_head, enum_body, enum_tail ;
+
+enum_head = ws, enum_name, ws, "::", ws, "enum", [" by ", integer], ws, "{", ws, [comment], EOL ;
+
+enum_body = [enum_member_with_initial_value], {enum_member} ;
+
+enum_member = ws, member_name, ws, [comment], EOL ;
+
+enum_member_with_initial_value = ws, member_name, ws, "=", ws, integer, ws, [comment], EOL ;
+
+enum_tail = ws, "}", ws, [comment], EOL ;
+```

@@ -1,6 +1,5 @@
 # Instructions
 
-- n8, n16, and e8 cannot be expressions, They can only be a number or a comptime variable name.
 - All registers and keywords must be lower-case.
 - Other than decimal, numbers can be binary or hex. With prefixes 0b, 0x respectively.
 - Comments are //, not ;.
@@ -160,7 +159,6 @@ r16 = *hl++
 *n16 = n8
 *n16 = r16          // Store two bytes in little-endian order.
 *n16 = n16          // Store two bytes in little-endian order.
-*n16 = n16          // Store two bytes in little-endian order.
 *hram(c) = r8
 *hram(c) = n8
 *hram(c) = r16
@@ -176,45 +174,53 @@ n16 = *hram(c)
 sp = n16
 sp = hl
 *n16 = sp
-hl = sp + s8
+hl = sp + e8
 // *hram(n16) loads/stores can be automatically placed if the n16 is in high ram.
 // If the user desires the extra space and cycles, then they should add a nop right after.
 //
 // Using the C or BC register with *hram(c) is invalid.
 //
-// Disallow setting a register to itself. Use breakpoint and debug keywords instead.
-// Disallow setting an HL register when using *hl++/--.
-//
-// Should the sp register be treated as an r16?
-
-Can I write most of these while only using the A register? Lets see:
+// Disallow using the same register for destination and source, dereferenced or not.
+// Use breakpoint and debug keywords for ld b, b and ld d, d instead.
 
 *r16 = *r16 
 is ambiguis because its not known if its setting 1 byte or 2.
- *r16 = u16(*r16) 
- *r16 = *u16(r16) 
- u16(*r16 = *r16) 
+*bc: u16 = *de 
 
+All possible load destinations:
+n8
+r8
+r8++/--
+n16
+r16
+r16++/--
 
-The asm equivalent of 
-```*bc = *de ```
-can be
-```
-// 16-bit transfer
-ld a, [bc]
-ld [de], a
-inc bc
-inc de
-ld a, [bc]
-ld [de], a
-dec bc
-dec de
-```
-or 
-```
-// 8-bit transfer
-ld a, [bc]
-ld [de], a
-```
+All possible load sources:
+*n16
+*n16++/--
+*r16
+*r16++/--
+*hram(c)
+sp
 
-How about **bc = **de 
+All possible store destinations:
+*n16
+*n16: u16
+*n16++/--
+*n16++/--: u16
+*r16
+*r16: u16
+*r16++/--
+*r16++/--: u16
+*hram(c)
+
+All possible store sources:
+n8
+r8
+r8++/--
+n16
+r16
+r16++/--
+
+I cant differentiate *n16 = n8 from *n16 = n16 because literals are untyped.
+*n16 = n8 is useless since *n16 = n16 already exists

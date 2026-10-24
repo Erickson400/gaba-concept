@@ -135,5 +135,14 @@ underworld := TileLayout {
 ld hl, underworld.grass
 
 
+Pseudo instructions size and cycles should not be based on previous instructions.
+The resources should stay consistent. If performance is desired then primitives should be used.
+
+Should the precompiled language be functional?
+Odin, Python, Rust, C... already exists, why should I re-invent the wheel when all these
+languages already have every needed language feature. 
+At most I'll add Function-Like Preprocessor macros like C.
+
+Should I add codegen support and make the needed tools as an odin package?
 
 
