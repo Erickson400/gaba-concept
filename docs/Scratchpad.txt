@@ -1,28 +1,5 @@
-Gabagool
-A GB HLA by Platanito.
-Concept Rev: Sep 24, 2026
-
 ---Pseudo Instructions---
 Pseudo instructions work like macros, but are built into the assembler.
-It makes code more readable.
-
-If statements:
-    if not zero {
-        // Body
-    } 
-if zero {
-
-} else if not carry {
-
-} else {
-
-}
-// These ifs will have a compare instruction at the start unlike the flag checks.
-if a > 20 {...
-if a < 45 {...
-if a == c {...
-if a != 0 {...
-ifr is also valid for jr instructions
 
 Loops:
     loop my_loop {
@@ -37,45 +14,15 @@ equivalent to
     my_loop.break:
 loopr is also valid for jr instructions
 
-:my_label:
-
 Pushpop:
 preserves r16 registers around the scope. 
 pushpop bc de af {
 
 }
 
-16-bit dereference:
-    // Todo
-    // Sets r16 to the value at the address in r16
-    r16 = *r16
-
-16-bit loads:
-    // Todo
-    // Stores the second r16 in the address pointed to by the first r16
-    {*r16} = {r16}
-
-b = *hl
-would be:
-push af             ; 4c, 1b 
-ld a, [hl]          ; 2c, 1b 
-ld a, b             ; 1c, 1b 
-pop af              ; 3c, 1b 
-                    ; 10c, 4b total
-
-compared to:
-ld a, [hl]          ; 2c, 1b 
-ld a, b             ; 1c, 1b 
-                    ; 3c, 2b total
-
-b = *hl fast
-
-adding these fast pseudos might not be worth it. 
-
 loops with a inc or dec register adds too many hidden costs. Better make it an infinite loop with break and continue features and let the user decide how to iterate. if statements also makes it easier for them. 
 
 I could also use these data structures to define rodata in ROM. I should probably make a separate rodata file instead of letting devs type it in the source. Allow arrays to be set with strings, they use the charmap
-
 
 Leftover for ROM struct allocations
 To allocate a constant struct in ROM, you just use the following syntax.
@@ -113,11 +60,13 @@ my_data := rodatax() #align(16) {
     text: string = "Hello" with my_charmap
 }
 
-action := proc(af, bc, de, hl) {
+action := proc() {
 
 }
 
-:= vector(0x40) {
+vblank := vector(0x40) {
+    
+}
 
 VRAM should not be allocated, instead a layout should be made like so:
 overworld := TileLayout {
@@ -134,15 +83,19 @@ underworld := TileLayout {
 }
 ld hl, underworld.grass
 
-
 Pseudo instructions size and cycles should not be based on previous instructions.
 The resources should stay consistent. If performance is desired then primitives should be used.
 
 Should the precompiled language be functional?
-Odin, Python, Rust, C... already exists, why should I re-invent the wheel when all these
-languages already have every needed language feature. 
-At most I'll add Function-Like Preprocessor macros like C.
 
-Should I add codegen support and make the needed tools as an odin package?
+Odin, Python, Rust, and C already exist. Why should I re-invent the wheel when all these
+languages already have every needed language feature. 
+
+Should I make a pure function scope that can be reused similar to pre-defined math functions?
+Should I add codegen support and make the needed tools as an odin library?
+
+
+
+
 
 

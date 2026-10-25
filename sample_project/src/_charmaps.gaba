@@ -1,6 +1,0 @@
-my_charmap := charmap{
-    "a" = 1
-    "b" = 2
-    "c" = 3
-    "123" = 4
-}
