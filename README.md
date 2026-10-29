@@ -30,14 +30,12 @@ Simplicity and redability is the main goal of the project. Unlike RGBDS which is
 - Structs
 - Unions
 - Arrays
-- Functions
+- Procedures
 - Strings
 - Charmaps
-- If/else statements
-- Loop statements
+- If/else
+- Loop
 - Switch statements
-- Comptime for loop
-- Comptime if statement
 
 Inspired by [Odin](https://odin-lang.org/docs/overview/), [RGBDS](https://rgbds.gbdev.io/), and [GB.HLA](https://github.com/daid/GB.HLA).
 

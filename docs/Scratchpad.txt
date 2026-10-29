@@ -1,26 +1,11 @@
 ---Pseudo Instructions---
 Pseudo instructions work like macros, but are built into the assembler.
 
-Loops:
-    loop my_loop {
-        continue my_loop
-        break my_loop    
-    }
-equivalent to
-    my_loop.start:
-    jp my_loop.start
-    jp my_loop.break
-    jp :+
-    my_loop.break:
-loopr is also valid for jr instructions
-
 Pushpop:
 preserves r16 registers around the scope. 
 pushpop bc de af {
 
 }
-
-loops with a inc or dec register adds too many hidden costs. Better make it an infinite loop with break and continue features and let the user decide how to iterate. if statements also makes it easier for them. 
 
 I could also use these data structures to define rodata in ROM. I should probably make a separate rodata file instead of letting devs type it in the source. Allow arrays to be set with strings, they use the charmap
 

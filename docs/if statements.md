@@ -91,6 +91,8 @@ Possible conditions, where X is a literal or register:
 
 You cannot mix a flag if statement with a comparison else if, and vice versa. You can however mix if and ifr.
 
+If statements can be used to make conditional *continues* and *breaks* in a loop, this will be discussed in the loops doc.
+
 ## Flag if statement EBNF Specs
 ```
 if_statement = if_head, {else_if}, (else | if_tail);

@@ -96,3 +96,6 @@ Should I make a separate file for rodata allocations. Does that mean I need unio
 
 
 strings
+
+coin := new Coin {
+coin := struct Coin {
