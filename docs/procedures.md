@@ -1,20 +1,20 @@
 # Procedures
-Procedures are used as subroutines. They have an implicit return instruction, and have the ability to pushpop r16 registers.
+Procedures are used as subroutines. They have an implicit return instruction at the end.
 
 ```
-add1 := proc(bc, de) {
+add1 := proc {
     a++
 }
 
-// Equivalent to the above.
-add1 := {
-    push bc
-    push de
-    a++
-    pop de
-    pop bc
+call add1
+
+// RGBDS equivalent
+add1:
+    inc a
     ret
-}
+
+    call add1
+
 ```
 
 

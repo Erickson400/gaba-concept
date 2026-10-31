@@ -50,7 +50,7 @@ action := proc() {
 }
 
 vblank := vector(0x40) {
-    
+    // Creates a jump at address 0x0040 that jumps to this block.
 }
 
 VRAM should not be allocated, instead a layout should be made like so:
@@ -79,8 +79,14 @@ languages already have every needed language feature.
 Should I make a pure function scope that can be reused similar to pre-defined math functions?
 Should I add codegen support and make the needed tools as an odin library?
 
+Color( #2afbb2 )
+RGB555(31, 31, 20)
 
+Specifying what bank you want a section is not needed. Bank Groups are a better alternative since you can tell which sections you want to share banks and which ones you dont.
 
+```
+access_sram {
 
-
+}
+```
 

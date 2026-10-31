@@ -24,7 +24,7 @@ Switches work on the A register only. Cases automatically break out of the switc
 The compiler placed each case section into ROM with a jump instruction at the end of each case pointing to the end of the switch. They're ordered in the same way you wrote them. A lookup table is then created with it's size being the (biggest_case - smallest_case), in the example above it would be 12 cases. Any case not specified between this range will be pointing to default (6, 8, 9, 10 in this example). The lookup table will hold pointers to the beginning of each case. Before the cases are allocated, a jp instruction will jump to our next location and skips all the data. This location checks if a is within it's case range, if not then it jumps to default (or leaves the switch if no default), if it is in range then it indexes the lookup table and jumps to it's corresponding case. Omitting Default creates a default case that has a jump to the end of the switch. 
 - Check that A is within range, if not then exit the switch
 - Set HL to the lookup table
-- Add the minimum case offset to A
+- Subtract the minimum case offset to A
 - Shift A left by one
 - Add A to HL using carry
 - Dereference HL

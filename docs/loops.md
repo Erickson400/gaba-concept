@@ -1,5 +1,24 @@
 # Loops
-Loops create an infinite loop. You can use the *continue* and *break* keywords to skip an iteration or leave the loop.
+Loops are used to iterate over a block of code. You can have an infinite loop, or while loops.
+```
+// Infinite loop
+loop {
+
+}
+
+// Loop while a condition is met when it starts.
+// Similar to a C while loop.
+loop while not zero {
+
+}
+
+// Loop while a condition is met when it finishes.
+// Similar to a C do-while loop.
+loop {
+
+} while a > 5
+```
+You can use the *continue* and *break* keywords to skip an iteration or leave the loop.
 ```
 my_loop := loop {
     loopr {                         // Loop with relative jumps.
