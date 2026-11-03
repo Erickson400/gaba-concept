@@ -1,18 +1,7 @@
----Pseudo Instructions---
-Pseudo instructions work like macros, but are built into the assembler.
-
-Pushpop:
-preserves r16 registers around the scope. 
-pushpop bc de af {
-
-}
-
-I could also use these data structures to define rodata in ROM. I should probably make a separate rodata file instead of letting devs type it in the source. Allow arrays to be set with strings, they use the charmap
-
-Leftover for ROM struct allocations
+---Leftover from ROM struct allocations
 To allocate a constant struct in ROM, you just use the following syntax.
 ```
-coin := Coin{
+coin := new Coin {
     normal_value = 6
     multiplier_value = 7
 }
@@ -20,7 +9,7 @@ coin := Coin{
 Dereferencing the address at *coin.normal_value* will then give you the value 6.
 
 ```
-sign := Sign{
+sign := new Sign {
     text = "This way"
 }
 // sign is 2 bytes, but the text string is stored after the struct finishes.
@@ -28,16 +17,10 @@ sign := Sign{
 // To get the size of the string use sign.text.string_size
 ```
 
-There is no charmap by default. Instead strings are just ascii mapped. The user has to create their own new charmap if they want to change it, any non set character will be ascii. You have to use the with keyword after a string to use your charmap
+Strings are ascii mapped by default. The user has to create their own new charmap if they want to change it, any non set character will be ascii. You have to use the *with* keyword after a string to use your charmap
 ```
 text = "Hello" with my_charmap 
 ```
-
-Should struct types even have a size, that way strings and asset fields can be a dynamic size. size and .end should only be for rodata. Wait, what about ram tho, it cant be dynamic.
-
-There should be special sections for the Vector addresses.
-
-It is unclear weather a label is treated as a jumpable address or a function. Better to distinguish between the two. Data is already represented with structs so there is no need to apply this to them.
 
 my_data := rodatax() #align(16) {
     x: u8 = 21
@@ -45,12 +28,9 @@ my_data := rodatax() #align(16) {
     text: string = "Hello" with my_charmap
 }
 
-action := proc() {
-
-}
-
 vblank := vector(0x40) {
-    // Creates a jump at address 0x0040 that jumps to this block.
+    // Puts a jp at address 0x0040 that jumps to this block.
+    // This automatically calls an interrupts return at the end.
 }
 
 VRAM should not be allocated, instead a layout should be made like so:
@@ -59,6 +39,7 @@ overworld := TileLayout {
 	clouds: tile[4 * 2]
 	grass: tile
 }
+Enums can work in a similar way, but enums cant have nested values. I should think about it if I want to make this a separate feature.
 
 @(bank = 2)
 underworld := TileLayout {

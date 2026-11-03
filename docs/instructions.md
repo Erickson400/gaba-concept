@@ -135,6 +135,12 @@ DAA                     --- daa
 NOP                     --- nop
 STOP                    --- stop
 
+Pushpop:
+preserves r16 registers around the scope. 
+pushpop(bc, de, af) {
+
+}
+
 All possible loads/stores:
 r8 = r8
 r8 = n8
