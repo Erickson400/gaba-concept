@@ -71,3 +71,13 @@ access_sram {
 }
 ```
 
+2D tile layout
+; Groups are only managed by the assembler, like `charmap`, relying on `INCLUDE` or `EXPORT` if layouts must be shared between TUs.
+tile_group[$8F00..=$93FF],BANK[1] {
+    MOUNTAINS: 17 tiles
+    CLOUDS: 4 * 2 tiles
+    export GRASS: 1 tile
+}
+
+assert that two enums dont have colliding values.
+for every call or jump in a bank group. assert that is not calling code from another bank group
