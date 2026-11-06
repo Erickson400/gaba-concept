@@ -71,13 +71,44 @@ access_sram {
 }
 ```
 
-2D tile layout
-; Groups are only managed by the assembler, like `charmap`, relying on `INCLUDE` or `EXPORT` if layouts must be shared between TUs.
-tile_group[$8F00..=$93FF],BANK[1] {
-    MOUNTAINS: 17 tiles
-    CLOUDS: 4 * 2 tiles
-    export GRASS: 1 tile
+assert that two enums dont have colliding values.
+
+for every call or jump in a bank group. assert that is not calling code from another bank group
+
+sram cant be randomly allocated, because saved data follows a strict structure.
+
+closely coupled code and data, like a variable declaration. vs isolated code and data like asm .rodata and .text.
+
+I could define rodata inside a proc. and in asm it will place the data above the subroutine. Only the proc can access this data.
+
+a procedure can havw atteibutes for rom and wram groups. Anything inside it follows these banks.
+, like local variables and rodata.
+
+MyArray = [0, 1, 2, 3]
+CompCopy!(MyArray, dest, hl)
+expands to:
+ld hl, dest
+ld a, 0
+ld [hli], a
+ld a, 1
+ld [hli], a
+ld a, 2
+ld [hli], a
+ld a, 3
+ld [hli], a
+Better call this an unroll?
+
+Replace hl: u16 with (u16)hl so that it's clear its a cast and not get it confused with a variable/field declaration.
+
+unroll loop {
+
 }
 
-assert that two enums dont have colliding values.
-for every call or jump in a bank group. assert that is not calling code from another bank group
+How do you do lookups?
+A lookup is a list of jumps to a bunch of labels. Or a list of labels.
+I dont have labels on Gaba, just entities. Unless I make a case entity like from a switch statement.
+A lookup could be an array in a ro-struct, who's values are set to the addresses of other entities. 
+A Jumplists are switch statements.
+Macros that return a sin table?
+
+

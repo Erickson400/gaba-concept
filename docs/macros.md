@@ -5,22 +5,28 @@ macro_name!(param1, param2, param3, ...etc)
 ```
 
 ## Parameter types
-#### Integer
+#### int
 A signed 64-bit literal/constant. Or any 16-bit constant like a label, procedure, or ROM address.
 
-#### Float
+#### float
 A 64-bit floating point number.
 
-#### Bool
+#### bool
 true or false
 
-#### Struct
+### reg8
+An 8-bit register
+
+### reg16
+A 16-bit register
+
+#### struct
 A constant with a Struct definition. e.g "MyStruct :: struct {...}".
 
-#### Enum
+#### enum
 A constant with an Enum definition. e.g "MyEnum :: enum {...}".
 
-#### String
+#### string
 A constant (Name :: "Eric"), or a literal string ("Hello")
 
 ### Optional and Variadtic Parameters

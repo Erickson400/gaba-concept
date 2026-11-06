@@ -11,7 +11,7 @@ TileType :: enum {
 
 a = TileType.Water  // Same as "a = 1" 
 ```
-You have the options to add an initial offset, or a step amount. 
+You have the option to add an initial offset, or a step amount. 
 ```
 Tile :: enum by 16 {
     Ground = 0x8000
@@ -21,7 +21,7 @@ Tile :: enum by 16 {
 }
 hl = Tile.Pickup  // Same as "hl = 0x8020" 
 ```
-## EBNF Specs
+## EBNF
 ```
 enum = enum_head, enum_body, enum_tail ;
 

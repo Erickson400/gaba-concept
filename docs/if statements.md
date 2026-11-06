@@ -54,7 +54,7 @@ if a > 3 {
     b = 23
 } else a != c {
     b = 56
-} else a <= 64 {
+} else a <= 0x6C {
     b = d
 } else {
     b = 0
@@ -91,9 +91,10 @@ Possible conditions, where X is a literal or register:
 
 You cannot mix a flag if statement with a comparison else if, and vice versa. You can however mix if and ifr.
 
-If statements can be used to make conditional *continues* and *breaks* in a loop, this will be discussed in the loops doc.
+If statements can be used to make conditional *continues* and *breaks* in a loop, this is discussed in the loops doc.
 
-## Flag if statement EBNF Specs
+## EBNF
+#### Flag if statement
 ```
 if_statement = if_head, {else_if}, (else | if_tail);
 
@@ -113,7 +114,7 @@ if_type = "if" | "ifr" ;
 
 ```
 
-## Comparison if statement EBNF Specs
+#### Comparison if statement
 ```
 if_statement = if_head, {else_if}, (else | if_tail);
 
