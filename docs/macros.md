@@ -51,5 +51,5 @@ enable ram bank
 
 HDMA transfer
 
-
+Embed binary
 

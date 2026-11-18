@@ -17,6 +17,11 @@ sign := new Sign {
 // To get the size of the string use sign.text.string_size
 ```
 
+; dereference HL only using A
+ld a, [hli]
+ld h, [hl]
+ld l, a
+
 Strings are ascii mapped by default. The user has to create their own new charmap if they want to change it, any non set character will be ascii. You have to use the *with* keyword after a string to use your charmap
 ```
 text = "Hello" with my_charmap 
@@ -33,12 +38,8 @@ vblank := vector(0x40) {
     // This automatically calls an interrupts return at the end.
 }
 
-VRAM should not be allocated, instead a layout should be made like so:
-overworld := TileLayout {
-	mountains: tile[17]
-	clouds: tile[4 * 2]
-	grass: tile
-}
+Remove vram sections and its allocation
+
 Enums can work in a similar way, but enums cant have nested values. I should think about it if I want to make this a separate feature.
 
 @(bank = 2)
@@ -77,16 +78,13 @@ for every call or jump in a bank group. assert that is not calling code from ano
 
 sram cant be randomly allocated, because saved data follows a strict structure.
 
-closely coupled code and data, like a variable declaration. vs isolated code and data like asm .rodata and .text.
+closely coupled code and data, like a variable declaration. vs isolated code and data like asm .rodata and .text. I like the Local rodata and variables path. I could define rodata inside a proc. and in asm it will place the data above the subroutine. Only the proc can access this data.
 
-I could define rodata inside a proc. and in asm it will place the data above the subroutine. Only the proc can access this data.
-
-a procedure can havw atteibutes for rom and wram groups. Anything inside it follows these banks.
-, like local variables and rodata.
+a procedure can have attributes for rom and wram groups. Anything inside it follows these banks, like local variables and rodata.
 
 MyArray = [0, 1, 2, 3]
 CompCopy!(MyArray, dest, hl)
-expands to:
+// Could expand to:
 ld hl, dest
 ld a, 0
 ld [hli], a
@@ -98,17 +96,15 @@ ld a, 3
 ld [hli], a
 Better call this an unroll?
 
+Directives start with # and modify the memory layout. Attributes modify the comptime behavior.
+
 Replace hl: u16 with (u16)hl so that it's clear its a cast and not get it confused with a variable/field declaration.
 
 unroll loop {
-
+    // eh. I might need a different syntax that takes a range
 }
 
-How do you do lookups?
-A lookup is a list of jumps to a bunch of labels. Or a list of labels.
-I dont have labels on Gaba, just entities. Unless I make a case entity like from a switch statement.
-A lookup could be an array in a ro-struct, who's values are set to the addresses of other entities. 
-A Jumplists are switch statements.
-Macros that return a sin table?
+Inline procedures
 
+What if procedures were reusable? Like duplicating them in different banks.
 

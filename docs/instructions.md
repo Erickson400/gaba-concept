@@ -3,13 +3,13 @@
 - All registers and keywords must be lower-case.
 - Other than decimal, numbers can be binary or hex. With prefixes 0b, 0x respectively.
 - Comments are //, not ;.
-
 cc can be
     - zero
     - not zero
     - carry
     - not carry
 
+```
 ---Opcode instructions mapped to RGBDS---
 Load instructions
 LD r8,r8                --- r8 = r8
@@ -192,6 +192,7 @@ hl = sp + e8
 *r16 = *r16 
 is ambiguis because its not known if its setting 1 byte or 2.
 *bc: u16 = *de 
+*(u16)bc = *de 
 
 All possible load destinations:
 n8
@@ -230,3 +231,4 @@ r16++/--
 
 I cant differentiate *n16 = n8 from *n16 = n16 because literals are untyped.
 *n16 = n8 is useless since *n16 = n16 already exists
+```

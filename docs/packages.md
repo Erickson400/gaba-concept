@@ -25,3 +25,8 @@ MY_CONST :: 74 // cannot be accessed outside this package
 MY_FILE_CONST :: 113 // cannot be accessed outside this file
 ```
 It is good practice to keep things public, only make things private when a naming conflict occurs or if you're making a libray API.
+
+
+@private-package
+@private-file
+
